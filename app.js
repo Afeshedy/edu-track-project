@@ -3,17 +3,23 @@ import { PORT} from "./config/env.js"
 import connectDB from "./config/db.js";
 import errorMiddleware from "./middleware/error.middleware.js";
 import authRouter from "./routes/auth.routes.js";
+import { userRouter } from "./routes/user.routes.js";
+import { courseRouter } from "./routes/course.routes.js";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Middleware
-app.use(errorMiddleware);
 
 app.use('/api/v1/auth', authRouter);
 
+app.use('/api/v1/user', userRouter);
+
+app.use('/api/v1/courses', courseRouter);
+
+// Middleware
+app.use(errorMiddleware);
 app.listen(PORT, async() => {
   console.log(`Server is running on http://localhost:${PORT}`);
   await connectDB();

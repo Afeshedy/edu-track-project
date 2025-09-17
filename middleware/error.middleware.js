@@ -26,7 +26,7 @@ const errorMiddleware = (err, req, res, next) => {
     }
 
     res
-      .staus(error.statusCode || 500)
+      .status(error.statusCode || 500)
       .json({ success: false, message: error.message });
   } catch (error) {
     next(error);
